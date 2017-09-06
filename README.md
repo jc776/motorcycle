@@ -1,18 +1,19 @@
 ## Motorcycle
 
-- Client re-runs on changes
+- Client re-runs on changes (hot module reloading!)
 - React + global.[name] for "figwheel" preserved state soon, I've done this before
 - Server (e.g. /hello) modified on changes (spring-loaded!)
-- * results may vary, I haven't put my forked sbt-spring-loaded for SBT 1.0 up yet
+  * results may vary, I haven't put my forked sbt-spring-loaded for SBT 1.0 up yet
 
 ```
-$ npm run dev
+$ yarn install
+$ yarn run dev
 -- second terminal --
 $ sbt
 > server/reStart
 > ~;server/compile;client/fastOptJS
 ```
-Then go to `localhost:8080`.
+`localhost:8080` is the webpack-dev-server, `localhost:3000` is the actual server. (Undertow)
 
 ## Other
 - scalajs-bundler? Not on SBT 1.0. Not sure how the "new reload" flow would do HMR.
