@@ -10,11 +10,12 @@ $ yarn install
 $ yarn run dev
 -- second terminal --
 $ sbt
-> server/reStart
-> ~;server/compile;client/fastOptJS
+> start
+> ~dev
 ```
 `localhost:8080` is the webpack-dev-server, `localhost:3000` is the actual server. (Undertow)
 
 ## Other
 - scalajs-bundler? Not on SBT 1.0. Not sure how the "new reload" flow would do HMR.
 - IDE? ENSIME doesn't like `slinky-web`. Eclipse should work with SBT 1.0, needs a weird beta to use ScalaJS 2.12.3.
+- [http://www.famfamfam.com/lab/icons/silk/](famfamfam's silk icons) are still cute
