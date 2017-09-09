@@ -4,12 +4,16 @@ import js.annotation.{JSExportTopLevel, JSExport}
 import me.shadaj.slinky.web.ReactDOM
 import org.scalajs.dom
 import me.shadaj.slinky.web.html._
+import dev.Atom 
 
 @JSExportTopLevel("Motorcycle")
 object Motorcycle {
   @JSExport
   def start(): Unit = {
-    val _ = ReactDOM.render(div("Hello, react?"), dom.document.getElementById("app"))
+    val atom = dev.defonce { new Atom(1) }
+    atom.value += 1
+    
+    val _ = ReactDOM.render(div(s"Updated! ${atom.value}"), dom.document.getElementById("app"))
   }
 
   // multiple bundles? maybe.

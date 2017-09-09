@@ -10,6 +10,7 @@ val shared = crossProject.crossType(CrossType.Pure)
       "io.circe" %%% "circe-generic" % circeVersion,
       "io.circe" %%% "circe-parser" % circeVersion,
       "biz.enef" %%% "slogging" % "0.5.3",
+      "com.lihaoyi" %%% "pprint" % "0.5.0"
     ),
 	  addCompilerPlugin("org.scalameta" % "paradise" % "3.0.0-M10" cross CrossVersion.full),
     watchSources := { Seq(WatchSource(baseDirectory.value / "src")) } // * 1
