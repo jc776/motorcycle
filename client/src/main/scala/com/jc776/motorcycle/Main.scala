@@ -3,17 +3,37 @@ import scalajs.js
 import js.annotation.{JSExportTopLevel, JSExport}
 import me.shadaj.slinky.web.ReactDOM
 import org.scalajs.dom
-import me.shadaj.slinky.web.html._
 import dev.Atom 
+import Program.{Model, Msg, Cmd}
+import slogging.LazyLogging
+import slogging.LoggerConfig
+import slogging.ConsoleLoggerFactory
 
 @JSExportTopLevel("Motorcycle")
-object Motorcycle {
+object Motorcycle extends LazyLogging {
+  LoggerConfig.factory = ConsoleLoggerFactory()
+  
+  val atom: Atom[Model] = dev.defonce { new Atom(Program.init) }
+  
+  def send(action: Msg) = {
+    val (next, cmd) = Program.update(atom.value, action)
+    atom.value = next
+    run(cmd)
+    render()
+  }
+  
+  def run(cmd: Cmd) = {
+    val _ = cmd
+  }
+  
+  def render(): Unit = {
+    val _ = ReactDOM.render(Program.view(atom.value, send), dom.document.getElementById("app"))
+  }
+  
   @JSExport
   def start(): Unit = {
-    val atom = dev.defonce { new Atom(1) }
-    atom.value += 1
-    
-    val _ = ReactDOM.render(div(s"Updated! ${atom.value}"), dom.document.getElementById("app"))
+    logger.info("Hello!")
+    render()
   }
 
   // multiple bundles? maybe.

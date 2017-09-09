@@ -72,8 +72,10 @@ dev in Compile := Def.sequential(
   (copyResources in Compile in server) 
 ).value 
 
-
 // * 1. sbt keeps locking node_modules/ and bin/.
 watchSources := { Seq() } 
+
+// * 2. "This file is derived, are you sure you want to edit it?"
+EclipseKeys.eclipseOutput in ThisBuild := Some("target-ide")
   
 
