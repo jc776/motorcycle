@@ -2,6 +2,7 @@ scalaVersion in ThisBuild := "2.12.3"
 version in ThisBuild := "0.0.0-SNAPSHOT"
 
 val circeVersion = "0.8.0"
+val mageVersion = "1.4.26"
 
 val shared = crossProject.crossType(CrossType.Pure)
   .settings(
@@ -26,9 +27,11 @@ val client = project
     name := "motorcycle-client",
     libraryDependencies ++= Seq(
       "me.shadaj" %%% "slinky-core" % "0.1.1",
-      "me.shadaj" %%% "slinky-web" % "0.1.1"
+      "me.shadaj" %%% "slinky-web" % "0.1.1",
+	    "me.shadaj" %%% "slinky-hot" % "0.1.1"
     ),
     scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.CommonJSModule) },
+	  scalacOptions += "-P:scalajs:sjsDefinedByDefault",
 	  // addCompilerPlugin(paradise) or does shared handle it?
     watchSources := { Seq(WatchSource(baseDirectory.value / "src")) } // * 1
   )
@@ -38,9 +41,12 @@ val client = project
 val server = project
   .settings(
     name := "motorcycle-server",
+    resolvers += Resolver.mavenLocal,
     libraryDependencies ++= Seq(
       "io.undertow" % "undertow-core" % "1.4.12.Final",
       "com.lihaoyi" %% "ammonite-ops" % "1.0.2"
+      //"org.mage" % "mage" % mageVersion,
+      //"org.mage" % "mage-common" % mageVersion,
       //"org.scala-lang.modules" %% "scala-java8-compat" % "0.8.0"
     ),
     watchSources := { Seq(WatchSource(baseDirectory.value / "src")) } // * 1

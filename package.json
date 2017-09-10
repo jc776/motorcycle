@@ -8,6 +8,7 @@
   "dependencies": {
     "react": "15.6.1",
     "react-dom": "15.6.1",
+    "react-proxy": "^1.1.8",
     "reconnecting-websocket": "^3.2.1"
   },
   "devDependencies": {

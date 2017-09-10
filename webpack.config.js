@@ -11,9 +11,11 @@ module.exports = {
     filename: "[name]-bundle.js"
   },
   devServer: {
-    proxy: {
-      "/": "http://localhost:3000"
-    }
+    "publicPath": "/",
+	  "proxy": {
+	    "/ws": { target: "http://localhost:3000/ws", secure: false, ws: true},
+	    "*": "http://localhost:3000"
+	  }
   },
   plugins: [
     new webpack.NamedModulesPlugin()
