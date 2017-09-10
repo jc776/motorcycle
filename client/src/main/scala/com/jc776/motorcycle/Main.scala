@@ -8,18 +8,34 @@ import slogging.LazyLogging
 import slogging.LoggerConfig
 import slogging.ConsoleLoggerFactory
 
+sealed trait Thing
+case object One extends Thing 
+case object Two extends Thing 
+
 @JSExportTopLevel("Motorcycle")
 object Main extends LazyLogging {
   LoggerConfig.factory = ConsoleLoggerFactory()
-  hot.initialize()
-
-  //val app = new App(Test)()
+  //hot.initialize()
   
   @JSExport
   def start(): Unit = {
-    val _ = ReactDOM.render(dev.ReactState(), dom.document.getElementById("app"))
+    
+    val x = dev.defonce[Thing]{ One }
+    try {
+      x match {
+        case One => println("One.")
+        case Two => println("Two.")
+      }
+    } catch {
+      case ex: MatchError => ex.printStackTrace()
+    }
+    
   }
 
   // multiple bundles? maybe.
   // def devcards(): Unit = { ... }
+
+  
+  //val app = new App(Test)()
+  //val _ = ReactDOM.render(dev.ReactCounter(), dom.document.getElementById("app"))
 }
